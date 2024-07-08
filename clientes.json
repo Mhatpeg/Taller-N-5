@@ -1,0 +1,26 @@
+[
+  {
+    "rut": "245749404",
+    "nombre": "Juan Farias",
+    "monto": 32000,
+    "clave": "ggm3J"
+  },
+  {
+    "rut": "195729305",
+    "nombre": "Maria Padilla",
+    "monto": 8000,
+    "clave": "lamaria"
+  },
+  {
+    "rut": "155792401",
+    "nombre": "Pamela Tobar",
+    "monto": 55000,
+    "clave": "pamelita3000"
+  },
+  {
+    "rut": "205349506",
+    "nombre": "Patricio Valenzuela",
+    "monto": 870,
+    "clave": "5472"
+  }
+]

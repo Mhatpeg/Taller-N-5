@@ -1,0 +1,122 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skin rose
+package lectura{
+    class Lectura{
+        - {static} banco:BancoImpl
+
+        + Lectura()
+        + leerClientes():void
+        + leerTransferencias():void
+    }
+}
+package model{
+    class Cliente {
+      - String rut
+      - String nombre
+      - int monto
+      - String clave
+
+      + Cliente(rut:String, nombre:String, monto:String, clave:String):cliente
+      + getRut():String
+      + getNombre():String
+      + getMonto():int
+      + getClave():String
+    }
+
+    class Transferencia {
+      - String rutPropio
+      - String rutDestinatario
+      - int monto
+      - String mensaje
+      - String apodo
+
+      + Transferencia(rutPropio:String, rutDestinatario:String, monto:int, mensaje:String, apodo,String): transferencia
+      + getRutPropio():String
+      + getRutDestinatario():String
+      + getMonto():int
+      + getMensaje():String
+      + getApodo():String
+    }
+
+    class TransferenciaBuilder{
+        - String rutPropio
+        - String rutDestinatario
+        - int monto
+        - String mensaje
+        - String apodo
+
+        + TransferenciaBuilder()
+        + (rutPropio:String, rutDestinatario:String, monto:int, mensaje:String, apodo,String): TransferenciaBuilder
+        + rutPropio(rutPropio: String): TransferenciaBuilder
+        + rutDestinatario(rutDestinatario: String): TransferenciaBuilder
+        + monto(monto: String): TransferenciaBuilder
+        + mensaje(mensaje: String): TransferenciaBuilder
+        + apodo(apodo: String): TransferenciaBuilder
+        + build(): Transferencia
+    }
+    TransferenciaBuilder --+ Transferencia: <<inner>>
+    TransferenciaBuilder "1..0" <--o "1" Cliente
+}
+package service{
+    interface Banco{
+        + getClientes():List<Cliente>
+        + getTransferencias():List<Transferencia>
+        + size():int
+        + getCliente(int posicion):Cliente
+        + agregarCliente(Cliente cliente):void
+        + agregarTransferencia(Transferencia transferencia):void
+        + loadClientes():void
+        + saveClientes(): void
+    }
+    class BancoImpl{
+        - {static} FILENAME_CLIENTES:String
+        - {static} FILENAME_TRANSFERENCIAS:String
+        - clientes:List<Cliente>
+        - transferencias:List<Transferencia>
+        - {static} Gson: gson
+
+        - BancoImpl()
+        - sort():void
+        + getClientes():List<Cliente>
+        + getTransferencias():List<Transferencia>
+        + size():int
+        + getCliente(posicion:int):Cliente
+        + agregarCliente(cliente:Cliente):void
+        - isEquals(c1:Cliente: c2:Cliente):boolean
+        + agregarTransferencia(transferencia Transferencia):void
+        + loadClientes():void
+        + saveClientes():void
+        + loadTransferencias():void
+        + saveTransferencias():void
+        + imprimirClientes():void
+        + imprimirTransferencias():void
+    }
+    BancoImpl ..|> Banco: <<implementes>>
+}
+package ui{
+    class BancoSingleton{
+        - {static} INSTANCE:Banco
+        - BancoSingleton
+        + {static} getInstance(): <<uses>>
+    }
+    BancoSingleton --> "1" Banco
+    BancoSingleton ..> BancoImpl: <<uses>>
+
+    class BancoModel{
+        + BancoModel()
+        + getRowCount(): int
+        + getColumnCount(): int
+        + getColumnName(): String
+        + getValueAt(rowIndex: int, columnIndex: int): Object
+    }
+    BancoModel ..> BancoSingleton: <<uses>>
+}
+package javax.swing.table {
+    class AbstractTableModel <<abstract>>{
+        ...
+    }
+    AbstractTableModel <|- BancoModel
+}
+@enduml

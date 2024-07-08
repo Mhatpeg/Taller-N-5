@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="stdlib">
+    <CLASSES>
+      <root url="jar://D:/GAMER_PC/Desktop/stdlib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../stdlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

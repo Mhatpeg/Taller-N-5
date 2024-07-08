@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+@startuml
+
+
+entity Cliente{
+    Rut
+    Nombre
+    Monto
+    Clave
+}
+
+entity Transferencia{
+    RutPropio
+    RutDestinatario
+    Monto
+    Mensaje
+    Apodo
+}
+Cliente "1" -- "1..*"Transferencia : Realiza >
+@enduml

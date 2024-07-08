@@ -1,0 +1,14 @@
+[
+  {
+    "rutPropio": "245749404",
+    "rutDestinatario": "155792401",
+    "monto": 3500,
+    "mensaje": "Comprate una chaparrita"
+  },
+  {
+    "rutPropio": "155792401",
+    "rutDestinatario": "205349506",
+    "monto": 15000,
+    "mensaje": "Gracias por tus servicios"
+  }
+]
